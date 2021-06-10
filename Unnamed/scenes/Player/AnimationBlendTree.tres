@@ -1,0 +1,83 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=19 format=2]
+
+[sub_resource type="AnimationNodeAnimation" id=2]
+animation = "Bored Idle-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "Idle-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "Searching Idle-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "Standing Idle-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=6]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=7]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=8]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachine" id=14]
+"states/Bored Idle/node" = SubResource( 2 )
+"states/Bored Idle/position" = Vector2( 194, 103 )
+states/Idle/node = SubResource( 3 )
+states/Idle/position = Vector2( 376, 103 )
+"states/Searching Idle/node" = SubResource( 4 )
+"states/Searching Idle/position" = Vector2( 570, 103 )
+"states/Standing Idle-loop/node" = SubResource( 5 )
+"states/Standing Idle-loop/position" = Vector2( 376, -27.5608 )
+transitions = [ "Idle", "Bored Idle", SubResource( 6 ), "Bored Idle", "Idle", SubResource( 7 ), "Idle", "Searching Idle", SubResource( 8 ), "Searching Idle", "Idle", SubResource( 9 ), "Standing Idle-loop", "Idle", SubResource( 10 ), "Bored Idle", "Standing Idle-loop", SubResource( 11 ), "Searching Idle", "Standing Idle-loop", SubResource( 12 ), "Idle", "Standing Idle-loop", SubResource( 13 ) ]
+start_node = "Standing Idle-loop"
+graph_offset = Vector2( 0, -118.338 )
+
+[sub_resource type="AnimationNodeBlend3" id=15]
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "Running-loop"
+
+[sub_resource type="AnimationNodeTimeScale" id=17]
+
+[sub_resource type="AnimationNodeAnimation" id=18]
+animation = "Walking-loop"
+
+[sub_resource type="AnimationNodeTimeScale" id=19]
+
+[resource]
+graph_offset = Vector2( -130.625, -121.559 )
+nodes/idle_fsm/node = SubResource( 14 )
+nodes/idle_fsm/position = Vector2( 60, -80 )
+nodes/iwr_blend/node = SubResource( 15 )
+nodes/iwr_blend/position = Vector2( 480, 20 )
+nodes/output/position = Vector2( 760, -60 )
+nodes/run/node = SubResource( 16 )
+nodes/run/position = Vector2( 60, 200 )
+nodes/run_scale/node = SubResource( 17 )
+nodes/run_scale/position = Vector2( 280, 200 )
+nodes/walk/node = SubResource( 18 )
+nodes/walk/position = Vector2( 60, 60 )
+nodes/walk_scale/node = SubResource( 19 )
+nodes/walk_scale/position = Vector2( 280, 60 )
+node_connections = [ "output", 0, "iwr_blend", "iwr_blend", 0, "idle_fsm", "iwr_blend", 1, "walk_scale", "iwr_blend", 2, "run_scale", "walk_scale", 0, "walk", "run_scale", 0, "run" ]

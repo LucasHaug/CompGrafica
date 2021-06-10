@@ -1,22 +1,80 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Player/Camera.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Player/ybot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Player/AnimationController.gd" type="Script" id=4]
 
-[sub_resource type="CapsuleMesh" id=1]
-radius = 0.5
-mid_height = 0.5
-
-[sub_resource type="SphereMesh" id=2]
-radius = 0.2
-height = 0.4
-
-[sub_resource type="CapsuleShape" id=3]
+[sub_resource type="CapsuleShape" id=1]
 radius = 0.5
 height = 0.5
 
+[sub_resource type="AnimationNodeAnimation" id=2]
+animation = "Standing Idle-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "Running-loop"
+
+[sub_resource type="AnimationNodeTimeScale" id=4]
+
+[sub_resource type="AnimationNodeBlendTree" id=5]
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 120, 140 )
+nodes/output/position = Vector2( 500, 160 )
+nodes/scale/node = SubResource( 4 )
+nodes/scale/position = Vector2( 320, 140 )
+node_connections = [ "scale", 0, "Animation", "output", 0, "scale" ]
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "Walking-loop"
+
+[sub_resource type="AnimationNodeTimeScale" id=7]
+
+[sub_resource type="AnimationNodeBlendTree" id=8]
+nodes/Animation/node = SubResource( 6 )
+nodes/Animation/position = Vector2( 100, 140 )
+nodes/output/position = Vector2( 520, 140 )
+nodes/scale/node = SubResource( 7 )
+nodes/scale/position = Vector2( 320, 140 )
+node_connections = [ "scale", 0, "Animation", "output", 0, "scale" ]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+switch_mode = 1
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+switch_mode = 2
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=15]
+states/idle/node = SubResource( 2 )
+states/idle/position = Vector2( 394, 91 )
+states/run/node = SubResource( 5 )
+states/run/position = Vector2( 539, 204 )
+states/walk/node = SubResource( 8 )
+states/walk/position = Vector2( 246, 204 )
+transitions = [ "idle", "walk", SubResource( 9 ), "walk", "idle", SubResource( 10 ), "walk", "run", SubResource( 11 ), "run", "walk", SubResource( 12 ), "run", "idle", SubResource( 13 ), "idle", "run", SubResource( 14 ) ]
+start_node = "idle"
+graph_offset = Vector2( 0, -25.2008 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=16]
+
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
+visual = NodePath("Visual")
+camroot = NodePath("Camroot")
 
 [node name="Camroot" type="Spatial" parent="."]
 script = ExtResource( 2 )
@@ -31,18 +89,25 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.78661 )
 current = true
 process_mode = 1
 
-[node name="Mesh" type="Spatial" parent="."]
-
-[node name="MeshInstance" type="MeshInstance" parent="Mesh"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.75, 0 )
-mesh = SubResource( 1 )
-material/0 = null
-
-[node name="MeshInstance" type="MeshInstance" parent="Mesh/MeshInstance"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.428653, -0.331322 )
-mesh = SubResource( 2 )
-material/0 = null
-
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.75, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
+
+[node name="Visual" type="Spatial" parent="."]
+
+[node name="ybot" parent="Visual" instance=ExtResource( 3 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 15 )
+anim_player = NodePath("../Visual/ybot/AnimationPlayer")
+active = true
+parameters/playback = SubResource( 16 )
+parameters/run/scale/scale = 1.0
+parameters/walk/scale/scale = 1.0
+
+[node name="AnimationController" type="Node" parent="."]
+script = ExtResource( 4 )
+anim_tree = NodePath("../AnimationTree")
+
+[editable path="Visual/ybot"]

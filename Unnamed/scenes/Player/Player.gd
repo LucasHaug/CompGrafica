@@ -1,6 +1,7 @@
 extends KinematicBody
 
-#export (NodePath) onready var body = self.get_node(body) as Position3D
+export(NodePath) onready var visual = self.get_node(visual) as Spatial
+export(NodePath) onready var camroot = self.get_node(camroot) as Spatial
 
 const g : float = -20.0 # m/s²
 
@@ -16,43 +17,64 @@ var acceleration : float = 6 # m/s²
 #var de_acc : float = 5 # m/s²
 var angular_acceleration : float = 7 # º/s²
 
-
 #var has_jumped : bool = false
 #var jump_initial_vel : float = 5 # m/s
 
-# Called when the node enters the scene tree for the first time.
+enum anim_signals {
+	WALK,
+	RUN,
+	IDLE
+}
+
+var cur_signal : int = anim_signals.IDLE
+var cur_mov_speed : float = 0
+
+signal walk_signal(mov_speed)
+signal run_signal(mov_speed)
+signal idle_signal()
+
+
 func _ready():
-	pass # Replace with function body.
+	pass
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	
-	var h_rot : float = $Camroot/h.global_transform.basis.get_euler().y
+	var h_rot : float = camroot.get_child(0).global_transform.basis.get_euler().y
 	
-	
-	if Input.is_action_pressed("forward") ||  Input.is_action_pressed("backward") ||  Input.is_action_pressed("left") ||  Input.is_action_pressed("right"):
+	if Input.is_action_pressed("forward") or Input.is_action_pressed("backward") or Input.is_action_pressed("left") or Input.is_action_pressed("right"):
 		var input_left : float = Input.get_action_strength("left") - Input.get_action_strength("right")
 		var input_forward : float = Input.get_action_strength("forward") - Input.get_action_strength("backward")
+		var walk_multiplier : float = 1
 		
-		# Map from square to circle
-		var mapped_left : float = input_left * sqrt(1 - input_forward*input_forward / 2)
-		var mapped_forward : float = input_forward * sqrt(1 - input_left*input_left / 2)
+		direction = Vector3(-input_left, 0,-input_forward)
 		
-		direction = Vector3(-mapped_left, 0,-mapped_forward)
+		if direction.length_squared() < 0.3:
+			walk_multiplier = 0.5
+		
 		direction = direction.rotated(Vector3.UP, h_rot).normalized()
-		
-		if Input.is_action_pressed("sprint"): #&& $AnimationTree.get("parameters/aim_transition/current") == 1:
+			
+		if Input.is_action_pressed("sprint"):
 			movement_speed = run_speed
-#			$AnimationTree.set("parameters/iwr_blend/blend_amount", lerp($AnimationTree.get("parameters/iwr_blend/blend_amount"), 1, delta * acceleration))
+			
+			if cur_signal != anim_signals.RUN:
+				self.emit_signal("run_signal", movement_speed)
+				cur_signal = anim_signals.RUN
 		else:
-			movement_speed = walk_speed
-#			$AnimationTree.set("parameters/iwr_blend/blend_amount", lerp($AnimationTree.get("parameters/iwr_blend/blend_amount"), 0, delta * acceleration))
+			movement_speed = walk_speed * walk_multiplier
+			
+			if cur_signal != anim_signals.WALK or cur_mov_speed != movement_speed:
+				self.emit_signal("walk_signal", movement_speed)
+				cur_signal = anim_signals.WALK
+				cur_mov_speed = movement_speed
 	else:
 		movement_speed = 0
+		
+		if cur_signal != anim_signals.IDLE:
+			self.emit_signal("idle_signal")
+			cur_signal = anim_signals.IDLE
 	
 	velocity = lerp(velocity, direction * movement_speed, acceleration * delta)
-	
 	
 	move_and_slide(velocity + Vector3.UP * vertical_velocity, Vector3.UP)
 	
@@ -61,7 +83,7 @@ func _physics_process(delta):
 	else:
 		vertical_velocity = 0
 
-	$Mesh.rotation.y = lerp_angle($Mesh.rotation.y, atan2(-direction.x, -direction.z), angular_acceleration * delta)
+	visual.rotation.y = lerp_angle(visual.rotation.y, atan2(-direction.x, -direction.z), angular_acceleration * delta)
 
 
 #	vel.y += g * delta
@@ -90,7 +112,7 @@ func _physics_process(delta):
 	
 #	print(actual_vel)
 
-func _input(event):
+func _input(_event):
 	pass
 #
 #	if Input.is_action_just_pressed("jump"):
