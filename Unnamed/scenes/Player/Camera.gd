@@ -6,8 +6,8 @@ var camrot_v : float = 0
 var mouse_sensitivity_h : float = 0.1
 var mouse_sensitivity_v : float = 0.1
 
-var joystick_sensitivity_h : float = 3
-var joystick_sensitivity_v : float = 2
+var joystick_sensitivity_h : float = 0.43
+var joystick_sensitivity_v : float = 0.29
 
 var acceleration_h : float = 10
 var acceleration_v : float = 10
@@ -43,5 +43,3 @@ func _physics_process(delta):
 	
 	$h.rotation_degrees.y = lerp($h.rotation_degrees.y, camrot_h, delta * acceleration_h)
 	$h/v.rotation_degrees.x = lerp($h/v.rotation_degrees.x, camrot_v, delta * acceleration_v)
-
-#export (NodePath) onready var camera = self.get_node(camera) as Camera
