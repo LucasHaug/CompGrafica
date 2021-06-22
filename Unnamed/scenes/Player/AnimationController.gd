@@ -5,8 +5,8 @@ export(NodePath) onready var anim_tree = self.get_node(anim_tree) as AnimationTr
 export(NodePath) onready var rest_timer = self.get_node(rest_timer) as Timer
 export(NodePath) onready var special_idle_timer = self.get_node(special_idle_timer) as Timer
 
-const MIN_REST_TIME : float = 2.0
-const MAX_REST_TIME : float = 4.0
+const MIN_REST_TIME : float = 4.0
+const MAX_REST_TIME : float = 10.0
 const SPECIAL_IDLE_ANIM_TIME : float = 4.0
 
 const WALK_SCALE : float = 1.0
