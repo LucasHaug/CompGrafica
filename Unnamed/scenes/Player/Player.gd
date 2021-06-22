@@ -17,8 +17,6 @@ var acceleration : float = 6 # m/s²
 #var de_acc : float = 5 # m/s²
 var angular_acceleration : float = 7 # º/s²
 
-#var has_jumped : bool = false
-#var jump_initial_vel : float = 5 # m/s
 
 enum anim_signals {
 	WALK,
@@ -32,10 +30,6 @@ var cur_mov_speed : float = 0
 signal walk_signal(mov_speed)
 signal run_signal(mov_speed)
 signal idle_signal()
-
-
-func _ready():
-	pass
 
 
 func _physics_process(delta):
@@ -84,36 +78,3 @@ func _physics_process(delta):
 		vertical_velocity = 0
 
 	visual.rotation.y = lerp_angle(visual.rotation.y, atan2(-direction.x, -direction.z), angular_acceleration * delta)
-
-
-#	vel.y += g * delta
-#
-#	if has_jumped:
-#		if self.is_on_floor():
-#			vel.y += jump_initial_vel
-#		has_jumped = false
-#
-#	var hv : Vector3 = vel
-#	hv.y = 0
-#
-#	var new_hv : Vector3 = speed * dir.normalized()
-#	var actual_acc : float = de_acc
-#
-#	if dir.dot(hv) > 0:
-#		actual_acc = acc
-#
-#	hv = hv.linear_interpolate(new_hv, actual_acc * delta)
-#
-#	vel.x = hv.x
-#	vel.z = hv.z
-#
-#
-#	vel = self.move_and_slide(vel, Vector3.UP)
-	
-#	print(actual_vel)
-
-func _input(_event):
-	pass
-#
-#	if Input.is_action_just_pressed("jump"):
-#		has_jumped = true
