@@ -52,7 +52,6 @@ func _stop_timers():
 	rest_timer.stop()
 
 func _get_random_delay() -> float:
-#	randomize()
 	return MIN_REST_TIME + (MAX_REST_TIME - MIN_REST_TIME) * randf()
 
 
@@ -66,7 +65,3 @@ func _ready():
 	special_idle_timer.connect("timeout", self, "_special_idle_timer_callback")
 	
 	rest_timer.start()
-
-func _physics_process(delta):
-	pass
-

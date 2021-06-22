@@ -25,10 +25,6 @@ func _input(event):
 		camrot_h += -event.relative.x * mouse_sensitivity_h
 		camrot_v += -event.relative.y * mouse_sensitivity_v
 	
-#	if event is InputEventJoypadMotion:
-#	camrot_h += (Input.get_action_strength("camera_left") - Input.get_action_strength("camera_right")) * joystick_sensitivity_h
-#	camrot_v += (Input.get_action_strength("camera_up") - Input.get_action_strength("camera_down")) * joystick_sensitivity_v
-	
 	if Input.is_action_just_pressed("window_escape"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		
