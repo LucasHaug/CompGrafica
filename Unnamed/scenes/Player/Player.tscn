@@ -1,114 +1,84 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Player/Camera.gd" type="Script" id=2]
-[ext_resource path="res://scenes/Player/ybot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Player/alex.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Player/AnimationController.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleShape" id=1]
-radius = 0.5
-height = 0.5
+radius = 0.3
+height = 0.4
 
 [sub_resource type="AnimationNodeAnimation" id=2]
-animation = "Bored Idle-loop"
-
-[sub_resource type="AnimationNodeAnimation" id=3]
-animation = "Idle-loop"
-
-[sub_resource type="AnimationNodeAnimation" id=4]
-animation = "Searching Idle-loop"
-
-[sub_resource type="AnimationNodeAnimation" id=5]
 animation = "Standing Idle-loop"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=6]
-xfade_time = 0.5
+[sub_resource type="AnimationNodeStateMachine" id=3]
+"states/Standing Idle/node" = SubResource( 2 )
+"states/Standing Idle/position" = Vector2( 311.058, -1.5806 )
+start_node = "Standing Idle"
+graph_offset = Vector2( -61.942, -77.5806 )
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=7]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=8]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=9]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=10]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachine" id=11]
-states/idle_bored/node = SubResource( 2 )
-states/idle_bored/position = Vector2( 185.058, 196 )
-states/idle_rest/node = SubResource( 3 )
-states/idle_rest/position = Vector2( 317, 110 )
-states/idle_search/node = SubResource( 4 )
-states/idle_search/position = Vector2( 461.057, 196 )
-states/idle_stand/node = SubResource( 5 )
-states/idle_stand/position = Vector2( 317, 8 )
-transitions = [ "idle_stand", "idle_rest", SubResource( 6 ), "idle_rest", "idle_bored", SubResource( 7 ), "idle_bored", "idle_rest", SubResource( 8 ), "idle_rest", "idle_search", SubResource( 9 ), "idle_search", "idle_rest", SubResource( 10 ) ]
-start_node = "idle_stand"
-graph_offset = Vector2( -124.942, -36.837 )
-
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=4]
 animation = "Running-loop"
 
-[sub_resource type="AnimationNodeTimeScale" id=13]
+[sub_resource type="AnimationNodeTimeScale" id=5]
 
-[sub_resource type="AnimationNodeBlendTree" id=14]
-nodes/Animation/node = SubResource( 12 )
+[sub_resource type="AnimationNodeBlendTree" id=6]
+nodes/Animation/node = SubResource( 4 )
 nodes/Animation/position = Vector2( 120, 140 )
 nodes/output/position = Vector2( 500, 160 )
-nodes/scale/node = SubResource( 13 )
+nodes/scale/node = SubResource( 5 )
 nodes/scale/position = Vector2( 320, 140 )
 node_connections = [ "scale", 0, "Animation", "output", 0, "scale" ]
 
-[sub_resource type="AnimationNodeAnimation" id=15]
-animation = "Walking-loop"
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Walking 1-loop"
 
-[sub_resource type="AnimationNodeTimeScale" id=16]
+[sub_resource type="AnimationNodeTimeScale" id=8]
 
-[sub_resource type="AnimationNodeBlendTree" id=17]
-nodes/Animation/node = SubResource( 15 )
+[sub_resource type="AnimationNodeBlendTree" id=9]
+graph_offset = Vector2( 0, 65.5 )
+nodes/Animation/node = SubResource( 7 )
 nodes/Animation/position = Vector2( 100, 140 )
 nodes/output/position = Vector2( 520, 140 )
-nodes/scale/node = SubResource( 16 )
+nodes/scale/node = SubResource( 8 )
 nodes/scale/position = Vector2( 320, 140 )
 node_connections = [ "scale", 0, "Animation", "output", 0, "scale" ]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
 switch_mode = 1
 xfade_time = 0.3
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
 switch_mode = 2
 xfade_time = 0.3
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
 xfade_time = 0.5
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
 xfade_time = 0.5
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
 xfade_time = 0.3
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
 xfade_time = 0.3
 
-[sub_resource type="AnimationNodeStateMachine" id=24]
-states/idle/node = SubResource( 11 )
+[sub_resource type="AnimationNodeStateMachine" id=16]
+states/idle/node = SubResource( 3 )
 states/idle/position = Vector2( 390, 71.6952 )
-states/run/node = SubResource( 14 )
+states/run/node = SubResource( 6 )
 states/run/position = Vector2( 539, 204 )
-states/walk/node = SubResource( 17 )
+states/walk/node = SubResource( 9 )
 states/walk/position = Vector2( 246, 204 )
-transitions = [ "walk", "run", SubResource( 18 ), "run", "walk", SubResource( 19 ), "run", "idle", SubResource( 20 ), "idle", "run", SubResource( 21 ), "walk", "idle", SubResource( 22 ), "idle", "walk", SubResource( 23 ) ]
+transitions = [ "walk", "run", SubResource( 10 ), "run", "walk", SubResource( 11 ), "run", "idle", SubResource( 12 ), "idle", "run", SubResource( 13 ), "walk", "idle", SubResource( 14 ), "idle", "walk", SubResource( 15 ) ]
 start_node = "idle"
-graph_offset = Vector2( 0, 34.2685 )
+graph_offset = Vector2( -30, 26.2685 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=25]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=17]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=26]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=18]
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -129,22 +99,22 @@ current = true
 process_mode = 1
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.75, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, 0 )
 shape = SubResource( 1 )
 
 [node name="Visual" type="Spatial" parent="."]
 
-[node name="ybot" parent="Visual" instance=ExtResource( 3 )]
+[node name="alex" parent="Visual" instance=ExtResource( 3 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 24 )
-anim_player = NodePath("../Visual/ybot/AnimationPlayer")
+tree_root = SubResource( 16 )
+anim_player = NodePath("../Visual/alex/AnimationPlayer")
 active = true
-parameters/playback = SubResource( 25 )
-parameters/idle/playback = SubResource( 26 )
-parameters/run/scale/scale = 1.0
-parameters/walk/scale/scale = 1.0
+parameters/playback = SubResource( 17 )
+parameters/idle/playback = SubResource( 18 )
+parameters/run/scale/scale = 1.5
+parameters/walk/scale/scale = 1.5
 
 [node name="AnimationController" type="Node" parent="."]
 script = ExtResource( 4 )
@@ -159,4 +129,4 @@ one_shot = true
 [node name="SpecialIdleTimer" type="Timer" parent="AnimationController"]
 one_shot = true
 
-[editable path="Visual/ybot"]
+[editable path="Visual/alex"]

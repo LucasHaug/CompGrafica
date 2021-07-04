@@ -11,10 +11,10 @@ var vertical_velocity : float = 0
 var direction : Vector3 = Vector3.FORWARD # m/s
 
 var movement_speed : float = 0 # m/s
-var walk_speed : float = 2.5 # m/s
-var run_speed : float = 5 # m/s
-var acceleration : float = 6 # m/s²
-#var de_acc : float = 5 # m/s²
+var walk_speed : float = 1.7 # m/s
+var run_speed : float = 4 # m/s
+var acc : float = 5 # m/s²
+var de_acc : float = 15 # m/s²
 var angular_acceleration : float = 7 # º/s²
 
 
@@ -33,7 +33,7 @@ signal idle_signal()
 
 
 func _physics_process(delta):
-	
+	var acceleration : float = acc # m/s²
 	var h_rot : float = camroot.get_child(0).global_transform.basis.get_euler().y
 	
 	if Input.is_action_pressed("forward") or Input.is_action_pressed("backward") or Input.is_action_pressed("left") or Input.is_action_pressed("right"):
@@ -63,6 +63,7 @@ func _physics_process(delta):
 				cur_mov_speed = movement_speed
 	else:
 		movement_speed = 0
+		acceleration = de_acc
 		
 		if cur_signal != anim_signals.IDLE:
 			self.emit_signal("idle_signal")

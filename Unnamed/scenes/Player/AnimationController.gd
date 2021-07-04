@@ -32,12 +32,14 @@ func _run_callback(mov_speed : float):
 
 
 func _rest_timer_callback():
+	pass
 	anim_tree.get("parameters/idle/playback").travel("idle_rest")
 	special_idle_timer.wait_time = _get_random_delay()
 	special_idle_timer.start()
 
 
 func _special_idle_timer_callback():
+	pass
 	if randf() > 0.5:
 		anim_tree.get("parameters/idle/playback").travel("idle_bored")
 	else:
