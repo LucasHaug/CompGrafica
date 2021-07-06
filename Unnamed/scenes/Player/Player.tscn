@@ -145,7 +145,7 @@ xfade_time = 1.0
 [sub_resource type="AnimationNodeStateMachineTransition" id=30]
 switch_mode = 2
 auto_advance = true
-xfade_time = 0.7
+xfade_time = 2.0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=31]
 xfade_time = 1.0
