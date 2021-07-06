@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/materials/low_poly.material" type="Material" id=1]
+[ext_resource path="res://assets/models/alex/alex.gltf" type="PackedScene" id=2]
+
+[node name="alex" instance=ExtResource( 2 )]
+
+[node name="Alex001" parent="Armature/Skeleton" index="0"]
+material/0 = ExtResource( 1 )
