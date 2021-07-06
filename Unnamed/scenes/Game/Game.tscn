@@ -1,22 +1,20 @@
 [gd_scene load_steps=3 format=2]
 
-[sub_resource type="CubeMesh" id=1]
-
-[sub_resource type="PlaneMesh" id=2]
-size = Vector2( 10, 10 )
+[ext_resource path="res://scenes/Game/Label.gd" type="Script" id=1]
+[ext_resource path="res://scenes/World/World.tscn" type="PackedScene" id=2]
 
 [node name="Game" type="Spatial"]
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28093, 3.9732 )
+[node name="World" parent="." instance=ExtResource( 2 )]
 
-[node name="Geometry" type="Spatial" parent="."]
-
-[node name="MeshInstance" type="MeshInstance" parent="Geometry"]
-transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0, 1.3, 0 )
-mesh = SubResource( 1 )
-material/0 = null
-
-[node name="MeshInstance2" type="MeshInstance" parent="Geometry"]
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Label" type="Label" parent="."]
+margin_left = 1.0
+margin_top = 2.0
+margin_right = 213.0
+margin_bottom = 88.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

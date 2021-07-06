@@ -244,7 +244,7 @@ script = ExtResource( 2 )
 [node name="h" type="Spatial" parent="Camroot"]
 
 [node name="v" type="Spatial" parent="Camroot/h"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4879, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29696, 0 )
 
 [node name="Camera" type="ClippedCamera" parent="Camroot/h/v"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.78661 )
