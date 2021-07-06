@@ -14,9 +14,10 @@ const RUN_SCALE : float = 1.0
 
 var moving_speed : float = 0
 
-const NUM_OF_SPECIAL_IDLES : int = 5
+const NUM_OF_SPECIAL_IDLES : int = 4
 
-var special_idles_names : Array = ["happy", "sad", "hip_hop", "waiting_action", "searching"]
+var special_idles_names : Array = ["happy", "sad", "hip_hop", "searching"]
+var special_idles_times : Array = [9, 6, 22, 12]
 
 func _idle_callback():
 	anim_tree.get("parameters/playback").travel("idle")
@@ -43,10 +44,9 @@ func _rest_timer_callback():
 func _special_idle_timer_callback():
 	var rand_num = randi() % NUM_OF_SPECIAL_IDLES
 	
-	anim_tree.get("parameters/idle/playback").travel("rest")
 	anim_tree.get("parameters/idle/playback").travel(special_idles_names[rand_num])
 		
-	special_idle_timer.wait_time = _get_random_delay() + SPECIAL_IDLE_ANIM_TIME
+	special_idle_timer.wait_time = _get_random_delay() + special_idles_times[rand_num]
 	special_idle_timer.start()
 
 
