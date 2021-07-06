@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/World/chunck2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/World/World.tres" type="Environment" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/World/chunck3.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/World/chunck4.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/World/props/big_bridge.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/World/water.tscn" type="PackedScene" id=8]
 
 [node name="World" type="Spatial"]
 
@@ -37,3 +38,6 @@ environment = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.1588, 20.0614, -90.5162 )
+
+[node name="water" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.201606, -0.885924, -0.146385 )
