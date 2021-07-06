@@ -20,12 +20,14 @@
 [node name="chunck4" parent="Meshes" instance=ExtResource( 6 )]
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 0.837127, 0.39121, -0.382326, -0.144037, 0.831921, 0.535874, 0.527704, -0.393526, 0.752772, -1.52398, 41.9872, -1.60856 )
-light_energy = 0.21
+transform = Transform( 0.827404, 0.0891921, -0.554479, 0.20504, 0.871179, 0.4461, 0.522839, -0.482796, 0.702529, -30.6416, 41.9872, -31.9308 )
+light_color = Color( 0.976471, 0.941176, 0.741176, 1 )
+light_energy = 0.94
+light_indirect_energy = 0.0
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.6577, 20.261, -85.3889 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.1588, 20.0614, -90.5162 )
