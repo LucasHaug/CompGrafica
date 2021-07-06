@@ -11,3 +11,5 @@ data = PoolVector3Array( -0.5078, 0.9767, 0.7969, -0.5313, 0.9947, 0.8125, -0.53
 
 [node name="CollisionShape" type="CollisionShape" parent="Cube004/StaticBody" index="0"]
 shape = SubResource( 1 )
+
+[node name="props" type="Spatial" parent="." index="1"]

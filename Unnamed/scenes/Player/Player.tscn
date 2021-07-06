@@ -249,6 +249,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29696, 0 )
 [node name="Camera" type="ClippedCamera" parent="Camroot/h/v"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.78661 )
 current = true
+far = 85.3
 process_mode = 1
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
