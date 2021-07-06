@@ -14,6 +14,10 @@ config/name="Unnamed"
 run/main_scene="res://scenes/Game/Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GameEvents="*res://singletons/game_events.gd"
+
 [display]
 
 window/size/width=1920
