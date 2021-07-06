@@ -48,6 +48,9 @@ func _special_idle_timer_callback():
 		
 	special_idle_timer.wait_time = _get_random_delay() + special_idles_times[rand_num]
 	special_idle_timer.start()
+	
+	if rand_num == 2:
+		GameEvents.emit_play_dance();
 
 
 func _stop_timers():
