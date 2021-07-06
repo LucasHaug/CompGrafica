@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dance.mp3-8bd2956f5dd6124ae1cc994a7cfba2cc.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/dance.mp3"
+dest_files=[ "res://.import/dance.mp3-8bd2956f5dd6124ae1cc994a7cfba2cc.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
