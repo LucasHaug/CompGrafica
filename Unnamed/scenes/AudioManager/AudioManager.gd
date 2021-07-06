@@ -9,20 +9,19 @@ var _garbage;
 
 
 func _ready():
-	_garbage = GameEvents.connect("play_background", self, "_on_play_background");
 	_garbage = GameEvents.connect("play_dance", self, "_on_play_dance");
-
-
-func _stop_all() -> void:
-	background_player.stop();
-	dance_player.stop();
+	_garbage = GameEvents.connect("play_background", self, "_on_play_background");
+	_garbage = dance_player.connect("finished", self, "_on_play_background");
 	
 
 func _on_play_background() -> void:
-	_stop_all();
-	background_player.play();
+	if dance_player.is_playing():
+		dance_player.stop()
+	
+	if background_player.get_stream_paused():
+		background_player.set_stream_paused(false);
 	
 
 func _on_play_dance() -> void:
-	_stop_all();
+	background_player.set_stream_paused(true);
 	dance_player.play();

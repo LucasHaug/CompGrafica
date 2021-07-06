@@ -20,22 +20,30 @@ var special_idles_names : Array = ["happy", "sad", "hip_hop", "searching"]
 var special_idles_times : Array = [9, 6, 22, 12]
 
 func _idle_callback():
+	GameEvents.emit_play_background()
+	
 	anim_tree.get("parameters/playback").travel("idle")
 	rest_timer.start()
 
 
 func _walk_callback(mov_speed : float):
+	GameEvents.emit_play_background()
+	
 	_stop_timers()
 	moving_speed = mov_speed
 	anim_tree.get("parameters/playback").travel("walk")
 
 
 func _run_callback(mov_speed : float):
+	GameEvents.emit_play_background()
+	
 	_stop_timers()
 	anim_tree.get("parameters/playback").travel("run")
 
 
 func _rest_timer_callback():
+	GameEvents.emit_play_background()
+	
 	anim_tree.get("parameters/idle/playback").travel("rest")
 	special_idle_timer.wait_time = _get_random_delay()
 	special_idle_timer.start()
@@ -50,7 +58,9 @@ func _special_idle_timer_callback():
 	special_idle_timer.start()
 	
 	if rand_num == 2:
-		GameEvents.emit_play_dance();
+		GameEvents.emit_play_dance()
+	else:
+		GameEvents.emit_play_background()
 
 
 func _stop_timers():
