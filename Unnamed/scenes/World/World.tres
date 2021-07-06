@@ -1,0 +1,16 @@
+[gd_resource type="Environment" load_steps=3 format=2]
+
+[ext_resource path="res://assets/hdr/immenstadter_horn_2k.hdr" type="Texture" id=1]
+
+[sub_resource type="PanoramaSky" id=8]
+panorama = ExtResource( 1 )
+
+[resource]
+background_mode = 3
+background_sky = SubResource( 8 )
+background_color = Color( 0.682353, 0.909804, 1, 1 )
+background_energy = 0.7
+fog_enabled = true
+fog_color = Color( 0.682353, 0.909804, 1, 1 )
+fog_sun_color = Color( 1, 0.901961, 0.701961, 1 )
+glow_intensity = 1.47
